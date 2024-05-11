@@ -18,7 +18,8 @@ class QaConfig(BaseConfigModel):
 
 
 def _select_environment_paths() -> BaseConfigModel:
-    env = os.getenv("ENV")
+    # by default the QA config will be auto selected
+    env = os.getenv("ENV") or "qa"
     if env.lower() not in SUPPORTED_ENVS:
         raise Exception(f"{env} is not supported environment")
 
