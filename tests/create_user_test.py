@@ -1,29 +1,19 @@
-import pytest
 
-import random
-import string
-
-from src.actions.actions import Actions
-
-
-def generate_random_string(length):
-    # Includes uppercase letters, lowercase letters, and digits
-    characters = string.ascii_letters + string.digits
-    return ''.join(random.choice(characters) for _ in range(length))
+from src.actions.actions_lookup import Actions
+from src.utils.random_data_generator import RandomDataGenerator
+from src.models.request_models.create_user_request_model import *
 
 
 def test_successful_user_creation():
-    username = generate_random_string(3)
-    email = generate_random_string(3) + "@example.com"
+    # Arrange
+    username = RandomDataGenerator.generate_random_string()
+    email = RandomDataGenerator.generate_random_string() + "@example.com"
 
-    user_data = {
-        "username": username,
-        "email": email,
-        "password": "1234567890"
-    }
+    user_data = CreateUserRequestModel(
+        username=username, email=email, password="1234567890")
 
     # Act
     response = Actions.user.create_new_user(user_data)
 
     # Assert
-    assert response["data"]["access_token"] != None
+    assert response.data.access_token != None
