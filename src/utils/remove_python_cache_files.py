@@ -4,8 +4,7 @@ import shutil
 
 def remove_python_cache_files():
     IGNORE_FOLDERS = ['.venv']  # List of folders to ignore
-    print(os.getcwd())
-
+    
     for root, dirs, files in os.walk(os.getcwd()):
         # Skip ignored folders
         dirs[:] = [d for d in dirs if d not in IGNORE_FOLDERS]

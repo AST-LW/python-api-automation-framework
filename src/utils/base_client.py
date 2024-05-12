@@ -1,3 +1,4 @@
+import globals
 import requests
 from typing import TypeVar, Callable
 from dataclasses import asdict
@@ -53,16 +54,31 @@ class RequestBuilder:
 
     def _send_request(self, method):
         url = self._build_url()
+
+        # Endpoint information
+        globals.LOGGER.info(f"Sending request to URL: {url}")
+        globals.LOGGER.info(f"Request Headers: {self._headers}")
+        globals.LOGGER.info(f"Request Query Parameters: {self._query_params}")
+        globals.LOGGER.info(f"Request Path Parameters: {self._path_params}")
+        globals.LOGGER.info(f"Request Data: {self._data}")
+
         response = method(
             url, json=self._data, headers=self._headers, params=self._query_params)
         return self._parse_response(response)
 
     def _parse_response(self, response):
         if response.ok:
+            globals.LOGGER.info(f"Response Status Code: {
+                                response.status_code}")
+            globals.LOGGER.info(f"Response Data: {response.json()}")
             return {"status": response.status_code, "data": response.json(), "error": None}
         else:
-            return {"status": response.status_code,
-                    "data": response.json(), "error": response.text}
+            error_message = response.text
+            globals.LOGGER.error(f"Response Status Code: {
+                                 response.status_code}")
+            globals.LOGGER.error(f"Response Error: {error_message}")
+            return {"status": response.status_code, "data": None, "error": error_message}
+
 
 # The following code is used to generate the dynamic request builder classes for HTTP methods
 
