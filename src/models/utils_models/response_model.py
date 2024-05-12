@@ -7,5 +7,5 @@ T = TypeVar("T")
 @dataclass
 class ResponseModel(Generic[T]):
     status: int = 0
-    data: T = None
-    error: str | None = ""
+    data: T | None = None
+    error: T | None = None

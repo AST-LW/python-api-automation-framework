@@ -1,5 +1,6 @@
 import globals
 import requests
+import json
 from typing import TypeVar, Callable
 from dataclasses import asdict
 from urllib.parse import urljoin
@@ -74,10 +75,11 @@ class RequestBuilder:
             return {"status": response.status_code, "data": response.json(), "error": None}
         else:
             error_message = response.text
-            globals.LOGGER.error(f"Response Status Code: {
+            
+            globals.LOGGER.info(f"Response Status Code: {
                                  response.status_code}")
-            globals.LOGGER.error(f"Response Error: {error_message}")
-            return {"status": response.status_code, "data": None, "error": error_message}
+            globals.LOGGER.info(f"Response Error: {error_message}")
+            return {"status": response.status_code, "data": None, "error": {**json.loads(error_message)}}
 
 
 # The following code is used to generate the dynamic request builder classes for HTTP methods

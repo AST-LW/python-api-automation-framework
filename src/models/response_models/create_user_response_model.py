@@ -11,3 +11,13 @@ class _CreateUserBodyModel:
 @dataclass
 class CreateUserResponseModel(ResponseModel):
     data: _CreateUserBodyModel
+
+
+@dataclass
+class _WithoutEmailBodyModel:
+    error: str
+
+
+@dataclass
+class WithoutEmailResponseModel(ResponseModel):
+    error: _WithoutEmailBodyModel

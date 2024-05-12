@@ -6,3 +6,9 @@ class CreateUserRequestModel:
     username: str = ""
     email: str = ""
     password: str = ""
+
+
+@dataclass
+class WithoutEmailRequestModel:
+    username: str = ""
+    password: str = ""
