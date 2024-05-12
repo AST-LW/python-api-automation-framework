@@ -9,7 +9,7 @@ class RequestPayloadGenerator:
     def create_new_user_payload(exclude=[]):
         username = RandomDataGenerator.generate_random_string()
         email = RandomDataGenerator.generate_random_string() + "@example.com"
-        password = parse_json("user", "$.create_new_user_password")
+        password = parse_json("user_service", "$.create_new_user_password")
 
         payload = {
             "username": username,

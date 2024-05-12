@@ -1,16 +1,16 @@
 import pytest
 import allure
+from http import HTTPStatus
 
 from src.actions.actions_lookup import Actions
 from src.models.request_models.create_user_request_model import *
 from fixtures import suite_scope, test_scope
 from src.utils.request_payload_generator import RequestPayloadGenerator
-
-import globals
+from tests.data.assert_messages import user_service
 
 
 @pytest.mark.usefixtures("suite_scope", "test_scope")
-class UserTests:
+class UserServiceTests:
 
     @allure.description("This test attempts to create a new user successfully")
     def test_successful_user_creation(self):
@@ -23,7 +23,7 @@ class UserTests:
         response = Actions.user.create_new_user(user_data)
 
         # Assert
-        assert response.status == 201
+        assert response.status == HTTPStatus.CREATED
         assert response.data.access_token != None
 
     @allure.description("This test verifies that an email field is required for successful user creation")
@@ -38,5 +38,5 @@ class UserTests:
         response = Actions.user.create_user_without_email(user_data)
 
         # Assert
-        assert response.status == 400
-        assert response.error.error == "Username, password, and email are required."
+        assert response.status == HTTPStatus.BAD_REQUEST
+        assert response.error.error == user_service.MISSING_EMAIL_ASSERT_MESSAGE
