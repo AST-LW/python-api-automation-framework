@@ -17,3 +17,5 @@ def test_scope():
     globals.LOGGER = LogReporterUtils.logger_initialization()
 
     yield
+
+    globals.LOGGER = None

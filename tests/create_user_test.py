@@ -3,6 +3,7 @@ import pytest
 from src.actions.actions_lookup import Actions
 from src.utils.random_data_generator import RandomDataGenerator
 from src.models.request_models.create_user_request_model import *
+from fixtures import suite_scope, test_scope
 
 
 @pytest.mark.usefixtures("suite_scope", "test_scope")
