@@ -12,6 +12,7 @@ from tests.data.assert_messages import user_service
 @pytest.mark.usefixtures("suite_scope", "test_scope")
 class UserServiceTests:
 
+    @pytest.mark.local  # To execute in local we use the "local marker"
     @allure.description("This test attempts to create a new user successfully")
     def test_successful_user_creation(self):
         # Arrange
