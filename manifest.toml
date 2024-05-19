@@ -1,2 +1,3 @@
 ENV = "qa"
 CAPTURE_LOGS = true
+TEST_CASE_LINK = "http://localhost:3000/"

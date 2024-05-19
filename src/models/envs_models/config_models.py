@@ -7,6 +7,7 @@ class ManifestModel:
     BASE_URL: str = ""
     CAPTURE_LOGS: bool = False
     ENV: str = ""
+    TEST_CASE_LINK: str = ""
 
 
 @dataclass
