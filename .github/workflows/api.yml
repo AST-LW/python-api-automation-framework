@@ -48,8 +48,8 @@ jobs:
       - name: Run the Docker Container
         run: |
           docker run \
-          -e SUITE={{ env.SUITE }} \
-          -e INSTANCES={{ env.INSTANCES }} \
+          -e SUITE=${{ env.SUITE }} \
+          -e INSTANCES=${{ env.INSTANCES }} \
           -v ${PWD}/allure-results:/allure-results \
           python-api-testing-container
 
