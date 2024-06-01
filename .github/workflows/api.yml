@@ -48,10 +48,12 @@ jobs:
       
       - name: Run the Docker Container
         run: |
+          touch test_summary.json
           docker run \
           -e SUITE=${{ env.SUITE }} \
           -e INSTANCES=${{ env.INSTANCES }} \
           -v ${PWD}/allure-results:/opt/pysetup/allure-results \
+          -v ${PWD}/test_summary.json:/opt/pysetup/test_summary.json \
           python-api-testing-container
 
       - name: Generate Allure Report and Send Notifications
