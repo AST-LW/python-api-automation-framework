@@ -48,7 +48,9 @@ jobs:
       
       - name: Run the Docker Container
         run: |
+          # Creating the test summary json file before the execution, else the mount is considering it as the directory instead of file
           touch test_summary.json
+
           docker run \
           -e SUITE=${{ env.SUITE }} \
           -e INSTANCES=${{ env.INSTANCES }} \

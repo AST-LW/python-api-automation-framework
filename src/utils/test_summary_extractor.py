@@ -54,8 +54,8 @@ def extract_allure_summary():
         print("Error reading test case files:", error)
         raise
 
-    summary_path = os.path.join(os.getcwd())
-    with open(summary_path + "/test_summary.json", "w+", encoding="utf-8") as file:
+    summary_path = os.path.join(os.getcwd(), "test_summary.json")
+    with open(summary_path, "w+", encoding="utf-8") as file:
         json.dump(summary, file, indent=4)
 
     return summary
