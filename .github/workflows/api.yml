@@ -1,0 +1,72 @@
+name: API Test Suite CI / CD Execution
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment"
+        required: true
+        type: choice
+        options:
+          - "qa"
+        default: "qa"
+      suite:
+        description: "Suite"
+        required: true
+        type: choice
+        options:
+          - "regression"
+          - "sanity"
+        default: "regression"
+      instances:
+        description: "Parallel instances"
+        required: true
+        type: choice
+        options:
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+        default: "1"
+
+jobs:
+  test-execution:
+    runs-on: ubuntu-latest
+    env:
+      ENV: ${{ github.event.inputs.environment }}
+      SUITE: ${{ github.event.inputs.suite }}
+      INSTANCES: ${{ github.event.inputs.instances }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Build the Docker Image
+        run: |
+          docker build -t python-api-testing-container .
+      
+      - name: Run the Docker Container
+        run: |
+          docker run \
+          -e SUITE={{ env.SUITE }} \
+          -e INSTANCES={{ env.INSTANCES }} \
+          -v ${PWD}/allure-results:/allure-results \
+          python-api-testing-container
+
+      - name: Upload Allure Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
+          retention-days: 1
+
+      # - name: Zip Allure results
+      #   run: zip -r allure-results.zip allure-results
+
+      # - name: Upload Allure results
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: allure-results
+      #     path: allure-results.zip
+      #     retention-days: 1

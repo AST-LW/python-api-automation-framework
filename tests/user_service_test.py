@@ -14,6 +14,7 @@ from src.utils.decorators.meta_data_decorator import meta_data, MetaData
 class UserServiceTests:
 
     @pytest.mark.local  # To execute in local we use the "local marker"
+    @pytest.mark.regression
     @meta_data(data=MetaData(tags=["positive-tc", "smoke"],
                              description="This test attempts to create a new user successfully",
                              author="Jane",
@@ -31,6 +32,7 @@ class UserServiceTests:
         assert response.status == HTTPStatus.CREATED
         assert response.data.access_token != None
 
+    @pytest.mark.regression
     @meta_data(data=MetaData(tags=["negative-tc", "smoke", "regression"],
                              description="This test verifies that an email field is required for successful user creation",
                              author="Jimmy",
