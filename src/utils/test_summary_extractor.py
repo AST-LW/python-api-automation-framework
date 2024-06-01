@@ -55,8 +55,6 @@ def extract_allure_summary():
         raise
 
     summary_path = os.path.join(os.getcwd(), "test_summary.json")
-    print(os.path.isfile(summary_path))
-    print(summary_path)
     with open(summary_path, "w+", encoding="utf-8") as file:
         json.dump(summary, file, indent=4)
 

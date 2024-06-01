@@ -6,7 +6,7 @@ LOG_FOLDER="./logs"
 # Set the path to the allure results & reports folder
 ALLURE_RESULTS_FOLDER="./allure-results"
 ALLURE_REPORT_FOLDER="./allure-report"
-TEST_SUMMARY_FILE="./test-summary.json"
+TEST_SUMMARY_FILE="./test_summary.json"
 
 # Function to remove a folder if it exists
 remove_folder() {

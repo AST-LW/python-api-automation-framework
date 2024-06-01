@@ -11,7 +11,7 @@ fi
 
 # Read test summary from a JSON file
 ROOT_DIR=${ROOT_DIR:-$(git rev-parse --show-toplevel)}
-test_summary=$(cat $ROOT_DIR/test-summary.json)
+test_summary=$(cat $ROOT_DIR/test_summary.json)
 
 # Extract properties using jq
 total_passed=$(echo "$test_summary" | jq '.totalPassed')

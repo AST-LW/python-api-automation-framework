@@ -52,7 +52,7 @@ jobs:
           -e SUITE=${{ env.SUITE }} \
           -e INSTANCES=${{ env.INSTANCES }} \
           -v ${PWD}/allure-results:/opt/pysetup/allure-results \
-          -v ${PWD}/test-summary.json:/opt/pysetup/test-summary.json \
+          -v ${PWD}/test_summary.json:/opt/pysetup/test_summary.json \
           python-api-testing-container
 
       - name: Generate Allure Report and Send Notifications

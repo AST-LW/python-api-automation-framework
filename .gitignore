@@ -161,4 +161,4 @@ cython_debug/
 
 allure-*
 logs/
-test-summary.json
+test_summary.json
