@@ -56,6 +56,7 @@ jobs:
 
       - name: Generate Allure Report and Send Notifications
         run: |
+          cd allure-results
           ls -a
           python src/utils/test_summary_extractor.py
           bash scripts/util-scripts/discord-notification.sh
