@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT_DIR="$(git rev-parse --show-toplevel)"
+ROOT_DIR=${ROOT_DIR:-$(git rev-parse --show-toplevel)}
 
 ALLURE_RESULTS_DIR="$ROOT_DIR/allure-results"
 ALLURE_REPORT_DIR="$ROOT_DIR/allure-report"

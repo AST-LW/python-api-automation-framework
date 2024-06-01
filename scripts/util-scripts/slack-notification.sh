@@ -10,7 +10,7 @@ if [ -z "$webhook_url" ]; then
 fi
 
 # Read test summary from a JSON file
-ROOT_DIR="$(git rev-parse --show-toplevel)"
+ROOT_DIR=${ROOT_DIR:-$(git rev-parse --show-toplevel)}
 test_summary=$(cat $ROOT_DIR/test-summary.json)
 
 # Extract properties using jq

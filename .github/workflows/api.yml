@@ -52,13 +52,11 @@ jobs:
           -e SUITE=${{ env.SUITE }} \
           -e INSTANCES=${{ env.INSTANCES }} \
           -v ${PWD}/allure-results:/opt/pysetup/allure-results \
+          -v ${PWD}/test-summary.json:/opt/pysetup/test-summary.json \
           python-api-testing-container
 
       - name: Generate Allure Report and Send Notifications
         run: |
-          cd allure-results
-          ls -a
-          python src/utils/test_summary_extractor.py
           bash scripts/util-scripts/discord-notification.sh
           bash scripts/util-scripts/slack-notification.sh
 
