@@ -7,4 +7,5 @@ chmod +x scripts/util-scripts/generate-allure-report.sh
 scripts/util-scripts/generate-allure-report.sh
 
 # extract the test execution summary
-python src/utils/test_summary_extractor.py
+ls -a
+python3 src/utils/test_summary_extractor.py
