@@ -37,6 +37,7 @@ jobs:
       SUITE: ${{ github.event.inputs.suite }}
       INSTANCES: ${{ github.event.inputs.instances }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
@@ -53,6 +54,13 @@ jobs:
           -v ${PWD}/allure-results:/opt/pysetup/allure-results \
           python-api-testing-container
 
+      - name: Generate Allure Report and Send Notifications
+        run: |
+          bash scripts/util-scripts/generate-allure-report.sh
+          python src/utils/test_summary_extractor.py
+          bash scripts/util-scripts/discord-notification.sh
+          bash scripts/util-scripts/slack-notification.sh
+
       - name: Upload Allure Results
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
@@ -61,12 +69,10 @@ jobs:
           path: allure-results
           retention-days: 1
 
-      # - name: Zip Allure results
-      #   run: zip -r allure-results.zip allure-results
-
-      # - name: Upload Allure results
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: allure-results
-      #     path: allure-results.zip
-      #     retention-days: 1
+      - name: Upload Allure Report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
+          retention-days: 1
