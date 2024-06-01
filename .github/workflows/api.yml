@@ -56,7 +56,8 @@ jobs:
 
       - name: Generate Allure Report and Send Notifications
         run: |
-          bash scripts/util-scripts/generate-allure-report.sh
+          ls -a
+          # bash scripts/util-scripts/generate-allure-report.sh
           python src/utils/test_summary_extractor.py
           bash scripts/util-scripts/discord-notification.sh
           bash scripts/util-scripts/slack-notification.sh
