@@ -252,10 +252,6 @@ Remember to keep your test cases focused, readable, and maintainable. Utilize th
 
 ## Running Tests in Local
 
-You're right, my apologies. Let me update the instructions to use Poetry instead of creating a virtual environment manually:
-
-## Running Tests
-
 To run the tests locally, follow these steps:
 
 1. **Install Poetry**:
